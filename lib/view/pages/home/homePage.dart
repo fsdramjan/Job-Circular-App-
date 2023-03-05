@@ -4,7 +4,7 @@ import 'package:job_circular_app/service/configs/appColors.dart';
 import 'package:job_circular_app/service/configs/appUtils.dart';
 import 'package:job_circular_app/view/widgets/ads/ads.dart';
 import 'package:job_circular_app/view/widgets/appBar/cAppBar.dart';
-import 'package:job_circular_app/view/widgets/popupMenu/cPopupMenuButton.dart';
+
 import 'package:job_circular_app/view/widgets/text/kText.dart';
 import '../../components/drawer/sidebarComponent.dart';
 import '../../components/job/jobListComponent.dart';
@@ -102,16 +102,7 @@ class HomePage extends StatelessWidget {
               ],
             ),
             sizeH10,
-            ListView.builder(
-                shrinkWrap: true,
-                primary: false,
-                itemCount: 10,
-                itemBuilder: (c, i) {
-                  return Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: JobListComponent(),
-                  );
-                }),
+            JobListComponent(),
             sizeH10,
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -247,21 +238,29 @@ class HomePage extends StatelessWidget {
                       onTap: () => Get.to(ChakriProstutiDetailsPage()),
                       color: white,
                       borderRadiusC: 10,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: blue,
+                      child: Column(
+                        children: [
+                          Stack(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: blue,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Padding(
+                                  padding: paddingAll5,
+                                  child: KText(
+                                    text:
+                                        'ইস্টার্ন ব্যাংক লিঃ এ ফাউচার লিডার প্রোগ্রাম ( সিনিয়র অফিসার ) পদে নিয়োগ বিজ্ঞপ্তি - ০৭/০৩',
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: paddingAll5,
-                          child: KText(
-                            text:
-                                'ইস্টার্ন ব্যাংক লিঃ এ ফাউচার লিডার প্রোগ্রাম ( সিনিয়র অফিসার ) পদে নিয়োগ বিজ্ঞপ্তি - ০৭/০৩',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                        ],
                       ),
                     ),
                   );

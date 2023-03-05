@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+    final formKey = GlobalKey<FormState>();
 
 final paddingZero = EdgeInsets.zero;
 final paddingAll5 = EdgeInsets.all(5);

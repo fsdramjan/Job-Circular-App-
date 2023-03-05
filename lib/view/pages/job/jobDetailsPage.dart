@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:job_circular_app/model/jobs/jobsModel.dart';
 import 'package:job_circular_app/service/configs/appColors.dart';
 import 'package:job_circular_app/service/configs/appUtils.dart';
 import 'package:job_circular_app/view/components/drawer/sidebarComponent.dart';
@@ -8,7 +9,15 @@ import 'package:job_circular_app/view/widgets/appBar/cAppBar.dart';
 import 'package:job_circular_app/view/widgets/card/customCard.dart';
 import 'package:job_circular_app/view/widgets/text/kText.dart';
 
+import '../../../service/datetime/datetimeFormat.dart';
+
 class JobDetailsPage extends StatelessWidget {
+  final JobsModel item;
+  final List images;
+  JobDetailsPage({
+    required this.item,
+    required this.images,
+  });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,14 +43,17 @@ class JobDetailsPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         KText(
-                          text:
-                              'ইস্টার্ন ব্যাংক লিঃ এ ফাউচার লিডার প্রোগ্রাম ( সিনিয়র অফিসার ) পদে নিয়োগ বিজ্ঞপ্তি - ০৭/০৩',
+                          text: item.name,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                         sizeH10,
                         KText(
-                          text: 'Deadline: 7 Mar 2023',
+                          text: 'পদ সংখ্যা: ${item.numberOfpost}',
+                        ),
+                        sizeH5,
+                        KText(
+                          text: 'Deadline: ${datetimeFormat(item.time)}',
                         ),
                         sizeH10,
                         Row(
@@ -56,7 +68,7 @@ class JobDetailsPage extends StatelessWidget {
                               child: Padding(
                                 padding: paddingH5,
                                 child: KText(
-                                  text: 'https://quicktechitltd.com',
+                                  text: item.applylink,
                                   color: blue,
                                 ),
                               ),
@@ -68,21 +80,40 @@ class JobDetailsPage extends StatelessWidget {
                   ),
                 ),
                 sizeH10,
-                customCard(
-                  height: 300,
-                  width: Get.width,
-                  elevation: 0,
-                  color: grey.shade300,
-                  child: FlutterLogo(),
-                ),
-                sizeH10,
-                customCard(
-                  height: 300,
-                  width: Get.width,
-                  elevation: 0,
-                  color: grey.shade300,
-                  child: FlutterLogo(),
-                ),
+
+                ListView.builder(
+                    shrinkWrap: true,
+                    primary: false,
+                    itemCount: images.length,
+                    itemBuilder: (c, i) {
+                      return Padding(
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: customCard(
+                          // height: 300,
+                          width: Get.width,
+                          elevation: 0,
+                          color: grey.shade300,
+                          child: Image.network(
+                            images[i],
+                          ),
+                        ),
+                      );
+                    }),
+                // customCard(
+                //   height: 300,
+                //   width: Get.width,
+                //   elevation: 0,
+                //   color: grey.shade300,
+                //   child: FlutterLogo(),
+                // ),
+                // sizeH10,
+                // customCard(
+                //   height: 300,
+                //   width: Get.width,
+                //   elevation: 0,
+                //   color: grey.shade300,
+                //   child: FlutterLogo(),
+                // ),
                 Divider(),
                 customCard(
                   elevation: 0,

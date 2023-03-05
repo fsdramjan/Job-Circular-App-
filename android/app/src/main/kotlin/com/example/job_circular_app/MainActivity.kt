@@ -1,4 +1,4 @@
-package com.example.job_circular_app
+package com.quicktech.job_app
 
 import io.flutter.embedding.android.FlutterActivity
 

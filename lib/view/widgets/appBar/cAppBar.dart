@@ -21,6 +21,14 @@ PreferredSizeWidget cAppBar({
       iconButton(
         icons: Icons.search,
       ),
+      iconButton(
+        icons: Icons.messenger,
+        child: Image.asset(
+          'assets/icons/messenger.webp',
+          height: 18,
+          color: white,
+        ),
+      ),
       _popupMenu(),
 
       // iconButton(

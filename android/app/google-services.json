@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "19152139248",
+    "project_id": "job-circular-app-aa3c8",
+    "storage_bucket": "job-circular-app-aa3c8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19152139248:android:b3560e0e7c8e20190b2335",
+        "android_client_info": {
+          "package_name": "com.quicktech.job_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19152139248-jjsbhtt024arqpfg341us8ije126t53k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwDjRDN0btvYWVKVHgAUZ3DJ6BLNKFOIk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19152139248-jjsbhtt024arqpfg341us8ije126t53k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

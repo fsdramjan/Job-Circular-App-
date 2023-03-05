@@ -46,7 +46,8 @@ class KText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       '$text',
-      style: GoogleFonts.hindSiliguri(
+      style: TextStyle(
+      // style: GoogleFonts.hindSiliguri(
         decoration: decoration,
         fontSize: isHeadTitle == true
             ? 16
