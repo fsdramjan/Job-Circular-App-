@@ -75,6 +75,11 @@ class JobDetailsPage extends StatelessWidget {
                             ),
                           ],
                         ),
+                        sizeH10,
+                        KText(
+                          text: item.description,
+                          fontSize: 12,
+                        ),
                       ],
                     ),
                   ),

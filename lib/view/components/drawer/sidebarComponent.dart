@@ -131,6 +131,7 @@ Widget sidebarComponent() {
                           onTap: () => Get.to(
                             CategoryWiseJobPage(
                               title: item['categoryName'],
+                              categoryId: item['id'],
                             ),
                           ),
                           icons: Icons.crop_free,

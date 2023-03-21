@@ -2,27 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_circular_app/service/configs/appColors.dart';
 import 'package:job_circular_app/service/configs/appUtils.dart';
+import 'package:job_circular_app/service/controllerService.dart';
+import 'package:job_circular_app/view/components/job/jobPreparationListComponent.dart';
+import 'package:job_circular_app/view/components/job/latestJobCircularComponent.dart';
 import 'package:job_circular_app/view/widgets/ads/ads.dart';
 import 'package:job_circular_app/view/widgets/appBar/cAppBar.dart';
-
 import 'package:job_circular_app/view/widgets/text/kText.dart';
 import '../../components/drawer/sidebarComponent.dart';
 import '../../components/job/jobListComponent.dart';
 import '../../widgets/card/customCard.dart';
-import '../job/chakriProstutiDetailsPage.dart';
-import '../job/latestJobCircularDetailsPage.dart';
+import '../job/allJobs/allJobsPage.dart';
+import '../job/latestCircular/latestCircularJobPage.dart';
 
-class HomePage extends StatelessWidget {
-  final extraCategoryList = [
-    {
-      'value': 1,
-      'title': 'Job Preparation',
-    },
-    {
-      'value': 2,
-      'title': 'Trending Job Question',
-    },
-  ];
+class HomePage extends StatelessWidget with AllController {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,7 +102,8 @@ class HomePage extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    print('object');
+                    // jobC.getMoreAllJobs();
+                    Get.to(AllJobsPage());
                   },
                   child: customCard(
                     width: 100,
@@ -148,38 +141,7 @@ class HomePage extends StatelessWidget {
             sizeH10,
             Padding(
               padding: paddingH10,
-              child: ListView.builder(
-                shrinkWrap: true,
-                primary: false,
-                itemCount: 5,
-                itemBuilder: (c, i) {
-                  return Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: customCard(
-                      onTap: () => Get.to(LatestJobCircularDetailsPage()),
-                      color: white,
-                      borderRadiusC: 10,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: blue,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Padding(
-                          padding: paddingAll5,
-                          child: KText(
-                            text:
-                                '${i + 1}. ইস্টার্ন ব্যাংক লিঃ এ ফাউচার লিডার প্রোগ্রাম ( সিনিয়র অফিসার ) পদে নিয়োগ বিজ্ঞপ্তি - ০৭/০৩',
-                            color: blue,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
+              child: LatestJobCircularComponent(),
             ),
             sizeH10,
             Row(
@@ -187,7 +149,7 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 customCard(
-                  onTap: () {},
+                  onTap: () => Get.to(LatestCircularJobPage()),
                   width: 160,
                   color: white,
                   elevation: 0,
@@ -227,45 +189,7 @@ class HomePage extends StatelessWidget {
             sizeH20,
             Padding(
               padding: paddingH10,
-              child: ListView.builder(
-                shrinkWrap: true,
-                primary: false,
-                itemCount: 5,
-                itemBuilder: (c, i) {
-                  return Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: customCard(
-                      onTap: () => Get.to(ChakriProstutiDetailsPage()),
-                      color: white,
-                      borderRadiusC: 10,
-                      child: Column(
-                        children: [
-                          Stack(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: blue,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Padding(
-                                  padding: paddingAll5,
-                                  child: KText(
-                                    text:
-                                        'ইস্টার্ন ব্যাংক লিঃ এ ফাউচার লিডার প্রোগ্রাম ( সিনিয়র অফিসার ) পদে নিয়োগ বিজ্ঞপ্তি - ০৭/০৩',
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
+              child: JobPreparationListComponent(),
             ),
             sizeH10,
             Row(
@@ -273,7 +197,7 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 customCard(
-                  onTap: () {},
+                  onTap: () => jobC.getMorePreparationJob(),
                   width: 100,
                   color: white,
                   elevation: 0,

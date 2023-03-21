@@ -12,12 +12,17 @@ import '../../../service/datetime/datetimeFormat.dart';
 import '../../pages/job/jobDetailsPage.dart';
 import '../../widgets/card/customCard.dart';
 
-class JobListComponent extends StatelessWidget with AllController {
+class CategorywiseJobComponent extends StatelessWidget with AllController {
+  final String? categoryId;
+  CategorywiseJobComponent({
+    required this.categoryId,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => StreamBuilder(
-          stream: jobC.getAllJobs(),
+          stream: jobC.categoryWiseJob(categoryId),
           builder: (context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
             if (!snapshot.hasData) {
@@ -124,50 +129,5 @@ class JobListComponent extends StatelessWidget with AllController {
                 });
           }),
     );
-    // customCard(
-    //   onTap: () => Get.to(JobDetailsPage()),
-    //   borderRadiusC: 5,
-    //   child: Padding(
-    //     padding: paddingAll10,
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.start,
-    //       children: [
-    //         Row(
-    //           children: [
-    //             Expanded(
-    //               child: KText(
-    //                 text:
-    //                    jobsModel.name,
-    //                 fontWeight: FontWeight.w600,
-    //               ),
-    //             ),
-    //             // sizeW10,
-    //             iconButton(
-    //               icons: Icons.bookmark_outline,
-    //               iconSize: 20,
-    //               iconColor: green,
-    //             ),
-    //           ],
-    //         ),
-    //         sizeH5,
-    //         Row(
-    //           children: [
-    //             KText(
-    //               text: 'Deadline: 7 Mar 2023',
-    //               color: red,
-    //               fontSize: 12,
-    //               fontStyle: FontStyle.italic,
-    //             ),
-    //             sizeW20,
-    //             KText(
-    //               text: 'পদ সংখ্যা: 21',
-    //               fontSize: 14,
-    //             ),
-    //           ],
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 }

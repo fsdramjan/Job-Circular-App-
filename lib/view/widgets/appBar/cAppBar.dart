@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:job_circular_app/view/pages/job/search/searchJobPage.dart';
 
 import '../../../service/configs/appColors.dart';
 import '../button/iconButton.dart';
@@ -19,6 +21,7 @@ PreferredSizeWidget cAppBar({
         icons: Icons.bookmark_outline,
       ),
       iconButton(
+        onTap: () => Get.to(SearchJobPage()),
         icons: Icons.search,
       ),
       iconButton(

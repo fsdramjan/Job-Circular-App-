@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../service/configs/appColors.dart';
 import '../../../service/configs/appUtils.dart';
 
-cFormField({
+Widget cFormField({
   double? height,
   Color? borderColor,
   String? hintText,
@@ -14,15 +14,20 @@ cFormField({
   bool isRequiredField = false,
   String? validatorText,
   TextInputType? textInputType,
+  Widget? prefixIcon,
+  Widget? suffixIcon,
+  void Function(String)? onChanged,
+  TextStyle? style,
 }) {
   return SizedBox(
-    height: 25,
+    height: height ?? 25,
     child: TextFormField(
+      onChanged: onChanged,
       controller: controller ?? TextEditingController(),
       keyboardType: textInputType,
       textAlign: textAlign,
       readOnly: readOnly,
-      style: GoogleFonts.hindSiliguri(
+      style:style?? GoogleFonts.hindSiliguri(
         fontSize: 12,
         fontWeight: FontWeight.w600,
       ),
@@ -60,6 +65,8 @@ cFormField({
           fontSize: 12,
           fontWeight: FontWeight.normal,
         ),
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
         fillColor: white,
         filled: true,
       ),

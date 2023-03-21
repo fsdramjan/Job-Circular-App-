@@ -2,17 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_circular_app/model/jobs/jobsModel.dart';
+import 'package:job_circular_app/service/configs/appColors.dart';
+import 'package:job_circular_app/service/configs/appUtils.dart';
+import 'package:job_circular_app/service/datetime/datetimeFormat.dart';
+import 'package:job_circular_app/view/pages/job/jobDetailsPage.dart';
 import 'package:job_circular_app/view/widgets/button/iconButton.dart';
+import 'package:job_circular_app/view/widgets/card/customCard.dart';
 import 'package:job_circular_app/view/widgets/text/kText.dart';
 
-import '../../../service/configs/appColors.dart';
-import '../../../service/configs/appUtils.dart';
-import '../../../service/controllerService.dart';
-import '../../../service/datetime/datetimeFormat.dart';
-import '../../pages/job/jobDetailsPage.dart';
-import '../../widgets/card/customCard.dart';
+import '../../../../service/controllerService.dart';
 
-class JobListComponent extends StatelessWidget with AllController {
+class SearchJobComponent extends StatelessWidget with AllController {
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -124,50 +124,5 @@ class JobListComponent extends StatelessWidget with AllController {
                 });
           }),
     );
-    // customCard(
-    //   onTap: () => Get.to(JobDetailsPage()),
-    //   borderRadiusC: 5,
-    //   child: Padding(
-    //     padding: paddingAll10,
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.start,
-    //       children: [
-    //         Row(
-    //           children: [
-    //             Expanded(
-    //               child: KText(
-    //                 text:
-    //                    jobsModel.name,
-    //                 fontWeight: FontWeight.w600,
-    //               ),
-    //             ),
-    //             // sizeW10,
-    //             iconButton(
-    //               icons: Icons.bookmark_outline,
-    //               iconSize: 20,
-    //               iconColor: green,
-    //             ),
-    //           ],
-    //         ),
-    //         sizeH5,
-    //         Row(
-    //           children: [
-    //             KText(
-    //               text: 'Deadline: 7 Mar 2023',
-    //               color: red,
-    //               fontSize: 12,
-    //               fontStyle: FontStyle.italic,
-    //             ),
-    //             sizeW20,
-    //             KText(
-    //               text: 'পদ সংখ্যা: 21',
-    //               fontSize: 14,
-    //             ),
-    //           ],
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 }

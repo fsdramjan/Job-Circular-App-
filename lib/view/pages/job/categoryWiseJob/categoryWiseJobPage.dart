@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:job_circular_app/service/configs/appUtils.dart';
 import 'package:job_circular_app/view/widgets/appBar/cAppBar.dart';
-
+import '../../../components/category/categoryWiseJobComponent.dart';
 import '../../../components/drawer/sidebarComponent.dart';
-import '../../../components/job/jobListComponent.dart';
 
 class CategoryWiseJobPage extends StatelessWidget {
   final String? title;
+  final String? categoryId;
   CategoryWiseJobPage({
     required this.title,
+      this.categoryId,
   });
 
   @override
@@ -21,16 +22,12 @@ class CategoryWiseJobPage extends StatelessWidget {
         child: ListView(
           children: [
             sizeH10,
-            ListView.builder(
-                shrinkWrap: true,
-                primary: false,
-                itemCount: 10,
-                itemBuilder: (c, i) {
-                  return Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: JobListComponent(),
-                  );
-                }),
+            Padding(
+              padding: EdgeInsets.only(bottom: 10),
+              child: CategorywiseJobComponent(
+                categoryId: categoryId.toString(),
+              ),
+            ),
             sizeH10,
           ],
         ),

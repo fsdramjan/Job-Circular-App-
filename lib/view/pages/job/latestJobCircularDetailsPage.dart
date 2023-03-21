@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:job_circular_app/model/jobs/jobsModel.dart';
 import 'package:job_circular_app/service/configs/appColors.dart';
 import 'package:job_circular_app/service/configs/appUtils.dart';
+import 'package:job_circular_app/service/datetime/datetimeFormat.dart';
 import 'package:job_circular_app/view/components/drawer/sidebarComponent.dart';
 import 'package:job_circular_app/view/widgets/ads/ads.dart';
 import 'package:job_circular_app/view/widgets/appBar/cAppBar.dart';
@@ -9,6 +11,13 @@ import 'package:job_circular_app/view/widgets/card/customCard.dart';
 import 'package:job_circular_app/view/widgets/text/kText.dart';
 
 class LatestJobCircularDetailsPage extends StatelessWidget {
+  final JobsModel jobsModel;
+  final List images;
+
+  LatestJobCircularDetailsPage({
+    required this.jobsModel,
+    required this.images,
+  });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,39 +43,39 @@ class LatestJobCircularDetailsPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         KText(
-                          text:
-                              'ইস্টার্ন ব্যাংক লিঃ এ ফাউচার লিডার প্রোগ্রাম ( সিনিয়র অফিসার ) পদে নিয়োগ বিজ্ঞপ্তি - ০৭/০৩',
+                          text: jobsModel.name,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                         sizeH10,
                         KText(
-                          text: 'পরীক্ষার তারিখ: ২৪ ফেব্রুয়ারী ২০২৩',
+                          text:
+                              'পরীক্ষার তারিখ: ${datetimeFormat(jobsModel.examDate)}',
                         ),
                         Divider(),
                         KText(
-                          text:
-                              'আগামী ২৪/০২/২০২৩ ইং তারিখে অনুষ্ঠিতব্য কতৃপক্ষের কারিগরি পুলের বিভিন্ন পদে নিয়োগের নিমিত্ত প্রাথীদের লিখিত পরীক্ষার আসন বিন্যাস',
+                          text: jobsModel.description,
                         ),
                       ],
                     ),
                   ),
                 ),
                 sizeH10,
-                customCard(
-                  height: 300,
-                  width: Get.width,
-                  elevation: 0,
-                  color: grey.shade300,
-                  child: FlutterLogo(),
-                ),
-                sizeH10,
-                customCard(
-                  height: 300,
-                  width: Get.width,
-                  elevation: 0,
-                  color: grey.shade300,
-                  child: FlutterLogo(),
+                ListView.builder(
+                  shrinkWrap: true,
+                  primary: false,
+                  itemCount: images.length,
+                  itemBuilder: (c, i) {
+                    return customCard(
+                      height: 300,
+                      width: Get.width,
+                      elevation: 0,
+                      color: grey.shade300,
+                      child: Image.network(
+                        images[i],
+                      ),
+                    );
+                  },
                 ),
                 Divider(),
                 Center(

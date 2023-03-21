@@ -2,15 +2,12 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../../../service/configs/appColors.dart';
 
 class KText extends StatelessWidget {
   final String? text;
   final Color? color;
   final double? fontSize;
-
   final String? fontFamily;
   final int? maxLines;
   final FontWeight? fontWeight;
@@ -21,7 +18,7 @@ class KText extends StatelessWidget {
   final TextDirection? textDirection;
   final TextDecoration? decoration;
   TextOverflow? overflow;
-  bool? isHeadTitle;
+ 
   Paint? foreground;
   FontStyle? fontStyle;
   KText({
@@ -37,7 +34,7 @@ class KText extends StatelessWidget {
     this.letterSpacing,
     this.decoration,
     this.overflow,
-    this.isHeadTitle,
+ 
     this.foreground,
     this.fontStyle,
   });
@@ -49,16 +46,8 @@ class KText extends StatelessWidget {
       style: TextStyle(
       // style: GoogleFonts.hindSiliguri(
         decoration: decoration,
-        fontSize: isHeadTitle == true
-            ? 16
-            : fontSize != null
-                ? fontSize
-                : 14,
-        fontWeight: isHeadTitle == true
-            ? FontWeight.bold
-            : fontWeight != null
-                ? fontWeight
-                : FontWeight.w500,
+        fontSize: 14,
+        fontWeight:   FontWeight.w500,
         color: color != null ? color : black,
         wordSpacing: wordSpacing,
         letterSpacing: letterSpacing,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:job_circular_app/model/jobs/jobsModel.dart';
 import 'package:job_circular_app/service/configs/appColors.dart';
 import 'package:job_circular_app/service/configs/appUtils.dart';
+import 'package:job_circular_app/service/datetime/datetimeFormat.dart';
 import 'package:job_circular_app/view/components/drawer/sidebarComponent.dart';
 import 'package:job_circular_app/view/widgets/ads/ads.dart';
 import 'package:job_circular_app/view/widgets/appBar/cAppBar.dart';
@@ -9,6 +11,11 @@ import 'package:job_circular_app/view/widgets/card/customCard.dart';
 import 'package:job_circular_app/view/widgets/text/kText.dart';
 
 class ChakriProstutiDetailsPage extends StatelessWidget {
+  final JobsModel item;
+
+  ChakriProstutiDetailsPage({
+    required this.item,
+  });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,35 +41,38 @@ class ChakriProstutiDetailsPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         KText(
-                          text:
-                              'ইস্টার্ন ব্যাংক লিঃ এ ফাউচার লিডার প্রোগ্রাম ( সিনিয়র অফিসার ) পদে নিয়োগ বিজ্ঞপ্তি - ০৭/০৩',
+                          text: item.name,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                         sizeH10,
                         KText(
-                          text: 'পরীক্ষার তারিখ: ২৪ ফেব্রুয়ারী ২০২৩',
+                          text:
+                              'পরীক্ষার তারিখ: ${datetimeFormat(item.examDate)}',
+                        ),
+                        sizeH10,
+                        KText(
+                          text: item.description,
                         ),
                       ],
                     ),
                   ),
                 ),
                 sizeH10,
-                customCard(
-                  height: 300,
-                  width: Get.width,
-                  elevation: 0,
-                  color: grey.shade300,
-                  child: FlutterLogo(),
-                ),
+                ListView.builder(
+                    shrinkWrap: true,
+                    primary: false,
+                    itemCount: item.images!.length,
+                    itemBuilder: (c, i) {
+                      return customCard(
+                        height: 300,
+                        width: Get.width,
+                        elevation: 0,
+                        color: grey.shade300,
+                        child: Image.network(item.images![i]),
+                      );
+                    }),
                 sizeH10,
-                customCard(
-                  height: 300,
-                  width: Get.width,
-                  elevation: 0,
-                  color: grey.shade300,
-                  child: FlutterLogo(),
-                ),
                 Divider(),
                 customCard(
                   elevation: 0,
