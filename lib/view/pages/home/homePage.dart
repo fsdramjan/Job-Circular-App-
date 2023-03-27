@@ -24,75 +24,75 @@ class HomePage extends StatelessWidget with AllController {
         padding: paddingH5,
         child: ListView(
           children: [
-            sizeH10,
-            Row(
-              children: [
-                customCard(
-                  onTap: () {},
-                  padding: EdgeInsets.all(5),
-                  color: blue,
-                  borderRadiusC: 5,
-                  height: 40,
-                  child: Center(
-                    child: KText(
-                      text: '  New Circular  ',
-                      color: white,
-                    ),
-                  ),
-                ),
-                customCard(
-                  onTap: () {},
-                  padding: EdgeInsets.all(5),
-                  color: blue,
-                  borderRadiusC: 5,
-                  height: 40,
-                  child: Center(
-                    child: KText(
-                      text: '  Deadline Tomorrow/Soon  ',
-                      color: white,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                customCard(
-                  onTap: () {},
-                  padding: EdgeInsets.all(5),
-                  color: blue,
-                  height: 40,
-                  width: Get.width / 1.5,
-                  borderRadiusC: 5,
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.mouse,
-                          color: white,
-                          size: 20,
-                        ),
-                        KText(
-                          text: '  Extra Category / Menu  ',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: white,
-                        ),
-                        Icon(
-                          Icons.mouse,
-                          color: white,
-                          size: 20,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // sizeH10,
+            // Row(
+            //   children: [
+            //     customCard(
+            //       onTap: () {},
+            //       padding: EdgeInsets.all(5),
+            //       color: blue,
+            //       borderRadiusC: 5,
+            //       height: 40,
+            //       child: Center(
+            //         child: KText(
+            //           text: '  New Circular  ',
+            //           color: white,
+            //         ),
+            //       ),
+            //     ),
+            //     customCard(
+            //       onTap: () {},
+            //       padding: EdgeInsets.all(5),
+            //       color: blue,
+            //       borderRadiusC: 5,
+            //       height: 40,
+            //       child: Center(
+            //         child: KText(
+            //           text: '  Deadline Tomorrow/Soon  ',
+            //           color: white,
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            // Column(
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     customCard(
+            //       onTap: () {},
+            //       padding: EdgeInsets.all(5),
+            //       color: blue,
+            //       height: 40,
+            //       width: Get.width / 1.5,
+            //       borderRadiusC: 5,
+            //       child: Center(
+            //         child: Row(
+            //           mainAxisAlignment: MainAxisAlignment.center,
+            //           crossAxisAlignment: CrossAxisAlignment.center,
+            //           children: [
+            //             Icon(
+            //               Icons.mouse,
+            //               color: white,
+            //               size: 20,
+            //             ),
+            //             KText(
+            //               text: '  Extra Category / Menu  ',
+            //               fontSize: 14,
+            //               fontWeight: FontWeight.w600,
+            //               color: white,
+            //             ),
+            //             Icon(
+            //               Icons.mouse,
+            //               color: white,
+            //               size: 20,
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
             sizeH10,
             JobListComponent(),
             sizeH10,

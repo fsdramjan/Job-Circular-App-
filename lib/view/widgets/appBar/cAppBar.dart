@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:job_circular_app/service/controllerService.dart';
 import 'package:job_circular_app/view/pages/job/search/searchJobPage.dart';
-
+import 'package:job_circular_app/view/pages/profile/profilePage.dart';
 import '../../../service/configs/appColors.dart';
+import '../../pages/wishlist/wishlistPage.dart';
 import '../button/iconButton.dart';
 import '../popupMenu/cPopupMenuButton.dart';
 import '../text/kText.dart';
@@ -18,6 +21,7 @@ PreferredSizeWidget cAppBar({
     ),
     actions: [
       iconButton(
+        onTap: () => Get.to(WishlistPage()),
         icons: Icons.bookmark_outline,
       ),
       iconButton(
@@ -43,53 +47,94 @@ PreferredSizeWidget cAppBar({
 }
 
 _popupMenu() {
+  final _ = AllController();
   return CPopupMenuButton(
     items: [
-      PopupMenuItem(
-        value: 1,
-        child: KText(text: 'অ্যাপ শেয়ার করুন'),
-      ),
-      PopupMenuItem(
-        value: 2,
-        child: KText(text: 'অ্যাপটিতে 5⭐ Star দিন'),
-      ),
-      PopupMenuItem(
-        value: 3,
-        child: KText(text: 'Career Forum/Discussion'),
-      ),
-      PopupMenuItem(
-        value: 4,
-        child: Row(
-          children: [
-            KText(text: 'More Options'),
-            Spacer(),
-            Icon(
-              Icons.arrow_right,
-              color: grey,
-            ),
-          ],
-        ),
-      ),
+      // PopupMenuItem(
+      //   value: 1,
+      //   child: KText(text: 'অ্যাপ শেয়ার করুন'),
+      // ),
+      // PopupMenuItem(
+      //   value: 2,
+      //   child: KText(text: 'অ্যাপটিতে 5⭐ Star দিন'),
+      // ),
+      // PopupMenuItem(
+      //   value: 3,
+      //   child: KText(text: 'Career Forum/Discussion'),
+      // ),
+      // PopupMenuItem(
+      //   value: 4,
+      //   child: Row(
+      //     children: [
+      //       KText(text: 'More Options'),
+      //       Spacer(),
+      //       Icon(
+      //         Icons.arrow_right,
+      //         color: grey,
+      //       ),
+      //     ],
+      //   ),
+      // ),
       PopupMenuItem(
         value: 5,
         child: Row(
           children: [
-            KText(text: 'Settings'),
+            KText(text: 'My Account'),
             Spacer(),
             Icon(
-              Icons.arrow_right,
+              Icons.person,
+              size: 20,
+              color: grey,
+            ),
+          ],
+        ),
+      ),
+      // PopupMenuItem(
+      //   value: 6,
+      //   child: Row(
+      //     children: [
+      //       KText(text: 'Settings'),
+      //       Spacer(),
+      //       Icon(
+      //         Icons.arrow_right,
+      //         color: grey,
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      PopupMenuItem(
+        value: 7,
+        child: Row(
+          children: [
+            KText(text: 'Logout'),
+            Spacer(),
+            Icon(
+              Icons.logout,
+              size: 15,
               color: grey,
             ),
           ],
         ),
       ),
       PopupMenuItem(
-        value: 6,
+        value: 8,
         child: KText(text: 'Exit'),
       ),
     ],
     onSelected: (int value) {
       print('You selected $value');
+
+      if (value == 5) {
+        Get.to(ProfilePage());
+      }
+
+      if (value == 7) {
+        _.authC.signout();
+      }
+
+      if (value == 8) {
+        SystemNavigator.pop();
+      }
     },
   );
 }

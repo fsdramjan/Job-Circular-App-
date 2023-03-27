@@ -7,7 +7,13 @@ import 'package:job_circular_app/service/controllerService.dart';
 import 'package:job_circular_app/view/pages/ageCalculator/ageCalculatorPage.dart';
 import 'package:job_circular_app/view/pages/home/homePage.dart';
 import 'package:job_circular_app/view/pages/job/categoryWiseJob/categoryWiseJobPage.dart';
+import 'package:job_circular_app/view/pages/job/otherCategoryPost/otherCategoryPostPage.dart';
+import 'package:job_circular_app/view/pages/saveDocument/saveCvPage.dart';
+import 'package:job_circular_app/view/pages/saveDocument/savePasswordPage.dart';
 import 'package:job_circular_app/view/widgets/text/kText.dart';
+
+import '../../pages/saveDocument/saveAdmiCardPage.dart';
+import '../../pages/wishlist/wishlistPage.dart';
 
 Widget sidebarComponent() {
   final allC = AllController();
@@ -31,30 +37,37 @@ Widget sidebarComponent() {
               text: 'Home',
             ),
             rowButton(
-              onTap: () {},
+              onTap: () => Get.to(WishlistPage()),
               icons: Icons.favorite,
               text: 'Favorite List',
             ),
             rowButton(
               onTap: () {},
-              icons: Icons.favorite,
+              icons: Icons.send_sharp,
               text: 'আমাদের মাধ্যমে Apply করুন',
             ),
             Divider(),
             rowButton(
-              onTap: () => Get.to(CategoryWiseJobPage(
-                title: 'Job Exam Notice',
+              onTap: () => Get.to(OtherCategoryPostPage(
+                categoryName: 'Job Exam Notice',
+                categoryId: 'jSo7HmNm7wCMeb5e5o75',
               )),
               icons: Icons.edit,
               text: 'Job Exam Notice',
             ),
             rowButton(
-              onTap: () {},
+              onTap: () => Get.to(OtherCategoryPostPage(
+                categoryName: 'Job Exam Result',
+                categoryId: 'ury9SwN4JAJQRlRAFwYS',
+              )),
               icons: Icons.local_fire_department,
               text: 'Job Exam Result',
             ),
             rowButton(
-              onTap: () {},
+              onTap: () => Get.to(OtherCategoryPostPage(
+                categoryName: 'National University News',
+                categoryId: 'uT1rn9EzCva7H1wMO3y3',
+              )),
               icons: Icons.school,
               text: 'National University News',
             ),
@@ -65,39 +78,35 @@ Widget sidebarComponent() {
               fontWeight: FontWeight.w700,
             ),
             rowButton(
-              onTap: () => Get.to(
-                CategoryWiseJobPage(
-                  title: 'Question Model',
-                ),
-              ),
+              onTap: () => Get.to(OtherCategoryPostPage(
+                categoryName: 'Question Model',
+                categoryId: 'MCGzFehf7bbf8PdmOoHb',
+              )),
               icons: Icons.question_answer_outlined,
               text: 'Question Model',
             ),
             rowButton(
-              onTap: () => Get.to(
-                CategoryWiseJobPage(
-                  title: 'Model Test',
-                ),
-              ),
+              onTap: () => Get.to(OtherCategoryPostPage(
+                categoryName: 'Model Test',
+                categoryId: 'wFsOV7pYaIakntbuZp8K',
+              )),
               icons: Icons.text_snippet,
               text: 'Model Test',
             ),
 
             rowButton(
-              onTap: () => Get.to(
-                CategoryWiseJobPage(
-                  title: 'ভাইভা অভিজ্ঞতা',
-                ),
-              ),
+              onTap: () => Get.to(OtherCategoryPostPage(
+                categoryName: 'ভাইভা অভিজ্ঞতা',
+                categoryId: 'S2ugi2RwP0BFS897frW5',
+              )),
               icons: Icons.filter_tilt_shift,
               text: 'ভাইভা অভিজ্ঞতা',
             ),
             rowButton(
-              onTap: () => Get.to(
-                CategoryWiseJobPage(
-                  title: 'ডাউনলোড জোন',
-                ),
-              ),
+              onTap: () => Get.to(OtherCategoryPostPage(
+                categoryName: 'ডাউনলোড জোন',
+                categoryId: 'i3hxQrpMyN7UiY7EseV9',
+              )),
               icons: Icons.download,
               text: 'ডাউনলোড জোন',
             ),
@@ -128,7 +137,7 @@ Widget sidebarComponent() {
                       itemBuilder: (c, i) {
                         final item = snapshot.data!.docs[i];
                         return rowButton(
-                          onTap: () => Get.to(
+                          onTap: () => Get.offAll(
                             CategoryWiseJobPage(
                               title: item['categoryName'],
                               categoryId: item['id'],
@@ -185,7 +194,10 @@ Widget sidebarComponent() {
               fontWeight: FontWeight.w500,
             ),
             rowButton(
-              onTap: () {},
+              onTap: () => Get.to(OtherCategoryPostPage(
+                categoryName: 'আবেদন ফরম,CV,অন্যান্য',
+                categoryId: 'ThXs21Jmzwrn4exGjedH',
+              )),
               icons: Icons.calendar_month,
               text: 'আবেদন ফরম,CV,অন্যান্য',
             ),
@@ -202,17 +214,17 @@ Widget sidebarComponent() {
               fontWeight: FontWeight.w500,
             ),
             rowButton(
-              onTap: () {},
+              onTap: () => Get.to(SaveCvPage()),
               icons: Icons.save,
               text: 'Save Cv',
             ),
             rowButton(
-              onTap: () {},
+              onTap: () => Get.to(SavePasswordPage()),
               icons: Icons.vpn_lock,
               text: 'Save Password',
             ),
             rowButton(
-              onTap: () {},
+              onTap: () => Get.to(SaveAdmitCardPage()),
               icons: Icons.save,
               text: 'Save Admit Card',
             ),

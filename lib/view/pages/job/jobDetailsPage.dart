@@ -36,6 +36,7 @@ class JobDetailsPage extends StatelessWidget {
                 customCard(
                   color: white,
                   elevation: 0,
+                  width: Get.width,
                   child: Padding(
                     padding: paddingAll10,
                     child: Column(
@@ -44,7 +45,7 @@ class JobDetailsPage extends StatelessWidget {
                       children: [
                         KText(
                           text: item.name,
-                          fontSize: 18,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                         sizeH10,
@@ -52,9 +53,12 @@ class JobDetailsPage extends StatelessWidget {
                           text: 'পদ সংখ্যা: ${item.numberOfpost}',
                         ),
                         sizeH5,
-                        KText(
-                          text: 'Deadline: ${datetimeFormat(item.time)}',
-                        ),
+                        item.deadline == ''
+                            ? sizeW10
+                            : KText(
+                                text:
+                                    'Deadline: ${datetimeFormat(item.deadline)}',
+                              ),
                         sizeH10,
                         Row(
                           children: [
@@ -62,14 +66,16 @@ class JobDetailsPage extends StatelessWidget {
                               text: 'Apply:',
                             ),
                             sizeW10,
-                            InkWell(
-                              onTap: () {},
-                              borderRadius: BorderRadius.circular(5),
-                              child: Padding(
-                                padding: paddingH5,
-                                child: KText(
-                                  text: item.applylink,
-                                  color: blue,
+                            Expanded(
+                              child: InkWell(
+                                onTap: () {},
+                                borderRadius: BorderRadius.circular(5),
+                                child: Padding(
+                                  padding: paddingH5,
+                                  child: KText(
+                                    text: item.applylink,
+                                    color: blue,
+                                  ),
                                 ),
                               ),
                             ),
@@ -78,7 +84,6 @@ class JobDetailsPage extends StatelessWidget {
                         sizeH10,
                         KText(
                           text: item.description,
-                          fontSize: 12,
                         ),
                       ],
                     ),
@@ -91,18 +96,20 @@ class JobDetailsPage extends StatelessWidget {
                     primary: false,
                     itemCount: images.length,
                     itemBuilder: (c, i) {
-                      return Padding(
-                        padding: EdgeInsets.only(bottom: 10),
-                        child: customCard(
-                          // height: 300,
-                          width: Get.width,
-                          elevation: 0,
-                          color: grey.shade300,
-                          child: Image.network(
-                            images[i],
-                          ),
-                        ),
-                      );
+                      return images.length == 0 || images.isEmpty
+                          ? Container()
+                          : Padding(
+                              padding: EdgeInsets.only(bottom: 10),
+                              child: customCard(
+                                // height: 300,
+                                width: Get.width,
+                                elevation: 0,
+                                color: grey.shade300,
+                                child: Image.network(
+                                  images[i],
+                                ),
+                              ),
+                            );
                     }),
                 // customCard(
                 //   height: 300,

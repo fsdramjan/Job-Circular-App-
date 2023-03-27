@@ -1,7 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 String? datetimeFormat(datetime) {
-  return DateFormat('MMM d, y').format(
-      datetime == Timestamp ? datetime.toDate() : DateTime.parse(datetime));
+  return datetime == '' || datetime == null
+      ? ''
+      : DateFormat('MMM d, y').format(DateTime.parse(datetime));
 }

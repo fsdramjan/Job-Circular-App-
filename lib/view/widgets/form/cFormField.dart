@@ -18,6 +18,10 @@ Widget cFormField({
   Widget? suffixIcon,
   void Function(String)? onChanged,
   TextStyle? style,
+  double? borderRadius,
+  double? fontSize,
+  EdgeInsetsGeometry? contentPadding,
+  bool obscureText = false,
 }) {
   return SizedBox(
     height: height ?? 25,
@@ -27,10 +31,13 @@ Widget cFormField({
       keyboardType: textInputType,
       textAlign: textAlign,
       readOnly: readOnly,
-      style:style?? GoogleFonts.hindSiliguri(
-        fontSize: 12,
-        fontWeight: FontWeight.w600,
-      ),
+      obscureText: obscureText,
+      obscuringCharacter: '*',
+      style: style ??
+          GoogleFonts.hindSiliguri(
+            fontSize: fontSize ?? 12,
+            fontWeight: FontWeight.w600,
+          ),
       validator: isRequiredField == false
           ? null
           : validatorText == '' &&
@@ -45,24 +52,27 @@ Widget cFormField({
                 },
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 5),
           borderSide: BorderSide(
             color: grey,
           ),
         ),
         focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 5),
           borderSide: BorderSide(
-            color: grey,
+            color: blue,
           ),
         ),
         errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 5),
           borderSide: BorderSide(
             color: red,
           ),
         ),
-        contentPadding: paddingH5,
+        contentPadding: contentPadding ?? paddingH5,
         hintText: '$hintText',
         hintStyle: GoogleFonts.hindSiliguri(
-          fontSize: 12,
+          fontSize: fontSize != null ? fontSize - 2 : 12,
           fontWeight: FontWeight.normal,
         ),
         prefixIcon: prefixIcon,

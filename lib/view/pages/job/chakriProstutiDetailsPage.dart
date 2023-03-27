@@ -34,6 +34,7 @@ class ChakriProstutiDetailsPage extends StatelessWidget {
                 customCard(
                   color: white,
                   elevation: 0,
+                  width: Get.width,
                   child: Padding(
                     padding: paddingAll10,
                     child: Column(

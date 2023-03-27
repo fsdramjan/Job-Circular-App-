@@ -9,10 +9,13 @@ class JobsController extends GetxController {
 
   final searchText = TextEditingController().obs;
 
-  var perPage = RxInt(1);
-  var circularJobPerPage = RxInt(1);
-  var preparationJobPerPage = RxInt(1);
-  var categoryWisePerPage = RxInt(1);
+  var pageValueExtend = 5;
+
+  var perPage = RxInt(5);
+  var circularJobPerPage = RxInt(5);
+  var preparationJobPerPage = RxInt(5);
+  var categoryWisePerPage = RxInt(5);
+  var otherategoryWisePerPage = RxInt(5);
 
   DocumentSnapshot? lastDocument;
   bool hasMoreData = true;
@@ -45,19 +48,23 @@ class JobsController extends GetxController {
   }
 
   getMoreAllJobs() {
-    perPage.value = perPage.value + 1;
+    perPage.value = perPage.value + pageValueExtend;
   }
 
   getMoreLatestCircularJob() {
-    circularJobPerPage.value = circularJobPerPage.value + 1;
+    circularJobPerPage.value = circularJobPerPage.value + pageValueExtend;
   }
 
   getMorePreparationJob() {
-    preparationJobPerPage.value = preparationJobPerPage.value + 1;
+    preparationJobPerPage.value = preparationJobPerPage.value + pageValueExtend;
   }
 
   getMoreCategoryWiseJob() {
-    categoryWisePerPage.value = categoryWisePerPage.value + 1;
+    categoryWisePerPage.value = categoryWisePerPage.value + pageValueExtend;
+  }
+
+  getMoreOtherCategoryWisePost() {
+    otherategoryWisePerPage.value = otherategoryWisePerPage.value + pageValueExtend;
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> categoryWiseJob(
@@ -66,6 +73,15 @@ class JobsController extends GetxController {
         .collection("jobs")
         .where("categoryId", isEqualTo: categoryId)
         .limit(categoryWisePerPage.value)
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> otherCategoryWisePost(
+      String? categoryId) {
+    return _firestore
+        .collection("otherCategoryPost")
+        .where("categoryId", isEqualTo: categoryId)
+        .limit(otherategoryWisePerPage.value)
         .snapshots();
   }
 

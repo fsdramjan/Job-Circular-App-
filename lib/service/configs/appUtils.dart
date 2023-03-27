@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
-    final formKey = GlobalKey<FormState>();
+
+//current user UUID
+// final uid = getStorage.read(userId);
+
+
+final formKey = GlobalKey<FormState>();
+// final getStorage = GetStorage();
+// final userUid = 'userUid';
 
 final paddingZero = EdgeInsets.zero;
 final paddingAll5 = EdgeInsets.all(5);

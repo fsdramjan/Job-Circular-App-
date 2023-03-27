@@ -18,7 +18,7 @@ class KText extends StatelessWidget {
   final TextDirection? textDirection;
   final TextDecoration? decoration;
   TextOverflow? overflow;
- 
+
   Paint? foreground;
   FontStyle? fontStyle;
   KText({
@@ -34,7 +34,6 @@ class KText extends StatelessWidget {
     this.letterSpacing,
     this.decoration,
     this.overflow,
- 
     this.foreground,
     this.fontStyle,
   });
@@ -44,11 +43,11 @@ class KText extends StatelessWidget {
     return Text(
       '$text',
       style: TextStyle(
-      // style: GoogleFonts.hindSiliguri(
+        // style: GoogleFonts.hindSiliguri(
         decoration: decoration,
-        fontSize: 14,
-        fontWeight:   FontWeight.w500,
-        color: color != null ? color : black,
+        fontSize: fontSize ?? 14,
+        fontWeight: fontWeight ?? FontWeight.w500,
+        color: color ?? black,
         wordSpacing: wordSpacing,
         letterSpacing: letterSpacing,
         foreground: foreground,
