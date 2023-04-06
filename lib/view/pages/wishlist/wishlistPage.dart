@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:job_circular_app/view/pages/home/homePage.dart';
+import 'package:job_circular_app/view/pages/job/jobDetailsPage.dart';
 import 'package:job_circular_app/view/widgets/button/iconButton.dart';
 import 'package:job_circular_app/view/widgets/card/customCard.dart';
 
@@ -47,7 +48,7 @@ class _WishlistPageState extends State<WishlistPage> with AllController {
                           child: KText(
                             text: 'Go to Home',
                             fontSize: 12,
-                            color: white,
+                            color: green,
                           ),
                         ),
                       ),
@@ -70,7 +71,11 @@ class _WishlistPageState extends State<WishlistPage> with AllController {
                             return Padding(
                               padding: EdgeInsets.only(bottom: 5),
                               child: customCard(
-                                onTap: () {},
+                                onTap: () => Get.to(
+                                  JobDetailsPage(
+                                    id: item.id,
+                                  ),
+                                ),
                                 borderRadiusC: 5,
                                 child: Padding(
                                   padding: EdgeInsets.all(8.0),

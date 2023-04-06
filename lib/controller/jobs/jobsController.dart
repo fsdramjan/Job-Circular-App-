@@ -1,6 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:job_circular_app/controller/auth/authController.dart';
+import 'package:job_circular_app/service/controllerService.dart';
+import 'package:job_circular_app/service/dialog/loadingDialog.dart';
+import 'package:job_circular_app/service/snackbar/snackbar.dart';
+import 'package:job_circular_app/view/pages/home/homePage.dart';
 
 import '../../model/jobs/jobsModel.dart';
 
@@ -8,6 +13,9 @@ class JobsController extends GetxController {
   final _firestore = FirebaseFirestore.instance;
 
   final searchText = TextEditingController().obs;
+
+  final phoneText = TextEditingController().obs;
+  final descriptionText = TextEditingController().obs;
 
   var pageValueExtend = 5;
 
@@ -19,6 +27,66 @@ class JobsController extends GetxController {
 
   DocumentSnapshot? lastDocument;
   bool hasMoreData = true;
+  clear() {
+    final _ = AllController();
+
+    _.authC.name.value.text = '';
+    _.authC.email.value.text = '';
+    phoneText.value.text = '';
+    descriptionText.value.text = '';
+    _.fileUploadC.selectedFile.value = '';
+    _.fileUploadC.selectedFileName.value = '';
+    _.fileUploadC.selectedImage.value = '';
+  }
+
+  applyForJob(
+    String? jobId,
+    String? jobName,
+  ) async {
+    try {
+      loadingDialog();
+      final id = _firestore.collection('appliedJobs').doc().id.toString();
+
+      final _ = AllController();
+      await _firestore.collection('appliedJobs').doc(id).set({
+        'id': '$id',
+        'jobId': '$jobId',
+        'jobName': '$jobName',
+        'userId': userId().toString(),
+        'name': _.authC.name.value.text,
+        'email': _.authC.email.value.text,
+        'phone': _.authC.phoneController.text,
+        'description': descriptionText.value.text,
+        'file': _.fileUploadC.selectedFile.value,
+        'fileName': _.fileUploadC.selectedFileName.value,
+        'status': 'Pending',
+        'profilePic': _.fileUploadC.selectedImage.value,
+        'time': DateTime.now().toString(),
+      });
+      if (id != '') {
+        snackbar('Job Applied Successfully!!');
+        clear();
+        Get.offAll(HomePage());
+      }
+    } catch (e) {
+      print(e);
+      Get.back();
+    }
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getMyAppliedJobs() {
+    return _firestore
+        .collection('appliedJobs')
+        .where(
+          'userId',
+          isEqualTo: userId().toString(),
+        )
+        .orderBy(
+          'time',
+          descending: false,
+        )
+        .snapshots();
+  }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getAllJobs() {
     return _firestore
@@ -28,6 +96,13 @@ class JobsController extends GetxController {
           descending: false,
         )
         .limit(perPage.value)
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getSingleJobs(String? jobId) {
+    return _firestore
+        .collection('jobs')
+        .where('id', isEqualTo: jobId.toString())
         .snapshots();
   }
 
@@ -64,7 +139,8 @@ class JobsController extends GetxController {
   }
 
   getMoreOtherCategoryWisePost() {
-    otherategoryWisePerPage.value = otherategoryWisePerPage.value + pageValueExtend;
+    otherategoryWisePerPage.value =
+        otherategoryWisePerPage.value + pageValueExtend;
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> categoryWiseJob(

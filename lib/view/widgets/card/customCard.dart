@@ -25,6 +25,14 @@ Widget customCard({
       onTap: onTap ?? null,
       borderRadius: BorderRadius.circular(borderRadiusC ?? 0),
       child: Container(
+        // decoration: BoxDecoration(
+        //   borderRadius:
+        //       borderRadius ?? BorderRadius.circular(borderRadiusC ?? 0),
+        //   color: color ?? grey.shade200,
+        //   border: Border.all(
+        //     color: borderColor ?? white,
+        //   ),
+        // ),
         height: height,
         width: width,
         child: child,

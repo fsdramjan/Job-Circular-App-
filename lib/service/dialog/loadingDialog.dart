@@ -3,11 +3,15 @@ import 'package:get/get.dart';
 import 'package:job_circular_app/service/configs/appColors.dart';
 import '../../view/widgets/text/kText.dart';
 
-loadingDialog({String? loadingText, bool barrierDismissible = false}) {
-  var context = Get.context as BuildContext;
+Future loadingDialog({
+  String? loadingText,
+  bool barrierDismissible = false,
+  BuildContext? context,
+}) async {
+  // context = Get.context as BuildContext;
   showDialog(
       barrierDismissible: barrierDismissible,
-      context: context,
+      context: context ?? Get.context as BuildContext,
       builder: (_) {
         return Dialog(
           shape: RoundedRectangleBorder(

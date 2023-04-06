@@ -10,6 +10,9 @@ import 'package:job_circular_app/view/widgets/appBar/cAppBar.dart';
 import 'package:job_circular_app/view/widgets/card/customCard.dart';
 import 'package:job_circular_app/view/widgets/text/kText.dart';
 
+import '../../widgets/detailsPageCard/detailsPageCard.dart';
+import 'applyJobs/applyJobsPage.dart';
+
 class ChakriProstutiDetailsPage extends StatelessWidget {
   final JobsModel item;
 
@@ -75,28 +78,14 @@ class ChakriProstutiDetailsPage extends StatelessWidget {
                     }),
                 sizeH10,
                 Divider(),
-                customCard(
-                  elevation: 0,
-                  color: white,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: paddingAll10,
-                      child: KText(
-                        text:
-                            '''পরীক্ষার প্রস্তুতির জন্য বিভিন্ন পিডিএফ এবং অনন্যা বিষয়ে আপডেট থাকতে আমাদের ফেসবুক গ্রুপে যোগ দিন -
-fb.com/groups/quicktechitltd
-অথবা ফেইসবুক পেজে লাইক দিন -
-fb.com/quicktechitltd
-ওয়েবসাইট: www.quicktechitltd.com''',
-                      ),
-                    ),
-                  ),
-                ),
+                detailsPageCard(),
                 sizeH20,
                 Center(
                   child: customCard(
-                    onTap: () {},
+                    onTap: () => Get.to(ApplyJobsPage(
+                      jobId: item.id,
+                      jobName: item.name,
+                    )),
                     color: blue,
                     borderRadiusC: 10,
                     child: Padding(

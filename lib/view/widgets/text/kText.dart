@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../service/configs/appColors.dart';
 
 class KText extends StatelessWidget {
@@ -42,8 +43,8 @@ class KText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       '$text',
-      style: TextStyle(
-        // style: GoogleFonts.hindSiliguri(
+      // style: TextStyle(
+        style: GoogleFonts.hindSiliguri(
         decoration: decoration,
         fontSize: fontSize ?? 14,
         fontWeight: fontWeight ?? FontWeight.w500,

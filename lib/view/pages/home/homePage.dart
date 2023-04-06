@@ -5,6 +5,7 @@ import 'package:job_circular_app/service/configs/appUtils.dart';
 import 'package:job_circular_app/service/controllerService.dart';
 import 'package:job_circular_app/view/components/job/jobPreparationListComponent.dart';
 import 'package:job_circular_app/view/components/job/latestJobCircularComponent.dart';
+import 'package:job_circular_app/view/components/slider/sliderComponent.dart';
 import 'package:job_circular_app/view/widgets/ads/ads.dart';
 import 'package:job_circular_app/view/widgets/appBar/cAppBar.dart';
 import 'package:job_circular_app/view/widgets/text/kText.dart';
@@ -20,9 +21,12 @@ class HomePage extends StatelessWidget with AllController {
     return Scaffold(
       drawer: sidebarComponent(),
       appBar: cAppBar(title: 'Job Circular'),
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: paddingH5,
         child: ListView(
+          shrinkWrap: true,
+          primary: false,
           children: [
             // sizeH10,
             // Row(
@@ -221,56 +225,22 @@ class HomePage extends StatelessWidget with AllController {
                 ),
               ],
             ),
+
             sizeH40,
             sizeH40,
           ],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: paddingH20,
+        child: SizedBox(
+          height: 50,
+          width: Get.width,
+          child: SliderComponent(),
+        ),
+      ),
       bottomSheet: ads(),
     );
   }
-
-  // _extraCategoryMenu() {
-  //   return CPopupMenuButton(
-  //     icon: customCard(
-  //       onTap: () {},
-  //       padding: EdgeInsets.all(5),
-  //       color: blue,
-  //       height: 40,
-  //       // width: Get.width / 1.5,
-  //       borderRadiusC: 5,
-  //       child: Row(
-  //         mainAxisAlignment: MainAxisAlignment.center,
-  //         crossAxisAlignment: CrossAxisAlignment.center,
-  //         children: [
-  //           Icon(
-  //             Icons.mouse,
-  //             color: white,
-  //             size: 20,
-  //           ),
-  //           KText(
-  //             text: '  Extra Category / Menu  ',
-  //             fontSize: 14,
-  //             fontWeight: FontWeight.w600,
-  //             color: white,
-  //           ),
-  //           Icon(
-  //             Icons.mouse,
-  //             color: white,
-  //             size: 20,
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //     items: extraCategoryList
-  //         .map((e) => PopupMenuItem(
-  //               value: e['value'] as int,
-  //               child: KText(
-  //                 text: e['title'].toString(),
-  //               ),
-  //             ))
-  //         .toList(),
-  //     onSelected: (v) {},
-  //   );
-  // }
 }

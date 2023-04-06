@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 //current user UUID
 // final uid = getStorage.read(userId);
 
-
 final formKey = GlobalKey<FormState>();
-// final getStorage = GetStorage();
+final getStorage = GetStorage();
+final phoneNumberL = 'phoneNumber';
 // final userUid = 'userUid';
 
 final paddingZero = EdgeInsets.zero;
@@ -14,6 +15,7 @@ final paddingAll10 = EdgeInsets.all(10);
 final paddingAll20 = EdgeInsets.all(20);
 
 final paddingH10V5 = EdgeInsets.symmetric(horizontal: 10, vertical: 5);
+final paddingH10V10 = EdgeInsets.symmetric(horizontal: 10, vertical: 10);
 final paddingH5 = EdgeInsets.symmetric(horizontal: 5);
 final paddingH10 = EdgeInsets.symmetric(horizontal: 10);
 final paddingH15 = EdgeInsets.symmetric(horizontal: 15);

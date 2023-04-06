@@ -7,6 +7,8 @@ import 'package:job_circular_app/view/pages/job/jobDetailsPage.dart';
 import 'package:job_circular_app/view/widgets/button/iconButton.dart';
 import 'package:job_circular_app/view/widgets/form/cFormField.dart';
 import '../../../../model/jobs/jobsModel.dart';
+import '../../../../model/wishlist/wishItemType.dart';
+import '../../../../model/wishlist/wishlistModel.dart';
 import '../../../../service/configs/appColors.dart';
 import '../../../../service/configs/appUtils.dart';
 import '../../../../service/datetime/datetimeFormat.dart';
@@ -61,8 +63,7 @@ class SearchJobPage extends StatelessWidget with AllController {
                   child: customCard(
                     onTap: () => Get.to(
                       JobDetailsPage(
-                        images: item.images as List<dynamic>,
-                        item: item,
+                        id: item.id,
                       ),
                     ),
                     borderRadiusC: 5,
@@ -81,6 +82,15 @@ class SearchJobPage extends StatelessWidget with AllController {
                               ),
                               // sizeW10,
                               iconButton(
+                                onTap: () =>
+                                    wishlistC.addWishlist(WishlistModel(
+                                  id: item.id,
+                                  name: item.name,
+                                  description: item.description,
+                                  numberOfPost: item.numberOfpost,
+                                  deadline: item.deadline,
+                                  wishItemType: WishItemType.jobCategory,
+                                )),
                                 icons: Icons.bookmark_outline,
                                 iconSize: 20,
                                 iconColor: green,

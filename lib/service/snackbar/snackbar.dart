@@ -9,13 +9,17 @@ snackbar(
   Color? textColor,
   Color? bgColor,
   Widget? child,
+  bool? showCloseIcon = true,
+  SnackBarAction? action,
 }) {
   ScaffoldMessenger.of(Get.context as BuildContext).showSnackBar(
     SnackBar(
       backgroundColor: bgColor ?? green,
-      showCloseIcon: true,
+      showCloseIcon: showCloseIcon,
       closeIconColor: white,
       elevation: 50,
+      action: action,
+      // duration: Duration(minutes: 30),
       content: child ??
           KText(
             text: message.toString(),

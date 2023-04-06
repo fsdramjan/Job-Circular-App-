@@ -10,6 +10,8 @@ import 'package:job_circular_app/view/pages/job/categoryWiseJob/categoryWiseJobP
 import 'package:job_circular_app/view/pages/job/otherCategoryPost/otherCategoryPostPage.dart';
 import 'package:job_circular_app/view/pages/saveDocument/saveCvPage.dart';
 import 'package:job_circular_app/view/pages/saveDocument/savePasswordPage.dart';
+import 'package:job_circular_app/view/pages/settings/privacyPolicyPage.dart';
+import 'package:job_circular_app/view/pages/settings/termsConditionsPage.dart';
 import 'package:job_circular_app/view/widgets/text/kText.dart';
 
 import '../../pages/saveDocument/saveAdmiCardPage.dart';
@@ -48,7 +50,7 @@ Widget sidebarComponent() {
             ),
             Divider(),
             rowButton(
-              onTap: () => Get.to(OtherCategoryPostPage(
+              onTap: () => Get.offAll(OtherCategoryPostPage(
                 categoryName: 'Job Exam Notice',
                 categoryId: 'jSo7HmNm7wCMeb5e5o75',
               )),
@@ -56,7 +58,7 @@ Widget sidebarComponent() {
               text: 'Job Exam Notice',
             ),
             rowButton(
-              onTap: () => Get.to(OtherCategoryPostPage(
+              onTap: () => Get.offAll(OtherCategoryPostPage(
                 categoryName: 'Job Exam Result',
                 categoryId: 'ury9SwN4JAJQRlRAFwYS',
               )),
@@ -64,7 +66,7 @@ Widget sidebarComponent() {
               text: 'Job Exam Result',
             ),
             rowButton(
-              onTap: () => Get.to(OtherCategoryPostPage(
+              onTap: () => Get.offAll(OtherCategoryPostPage(
                 categoryName: 'National University News',
                 categoryId: 'uT1rn9EzCva7H1wMO3y3',
               )),
@@ -78,7 +80,7 @@ Widget sidebarComponent() {
               fontWeight: FontWeight.w700,
             ),
             rowButton(
-              onTap: () => Get.to(OtherCategoryPostPage(
+              onTap: () => Get.offAll(OtherCategoryPostPage(
                 categoryName: 'Question Model',
                 categoryId: 'MCGzFehf7bbf8PdmOoHb',
               )),
@@ -86,7 +88,7 @@ Widget sidebarComponent() {
               text: 'Question Model',
             ),
             rowButton(
-              onTap: () => Get.to(OtherCategoryPostPage(
+              onTap: () => Get.offAll(OtherCategoryPostPage(
                 categoryName: 'Model Test',
                 categoryId: 'wFsOV7pYaIakntbuZp8K',
               )),
@@ -95,7 +97,7 @@ Widget sidebarComponent() {
             ),
 
             rowButton(
-              onTap: () => Get.to(OtherCategoryPostPage(
+              onTap: () => Get.offAll(OtherCategoryPostPage(
                 categoryName: 'ভাইভা অভিজ্ঞতা',
                 categoryId: 'S2ugi2RwP0BFS897frW5',
               )),
@@ -103,7 +105,7 @@ Widget sidebarComponent() {
               text: 'ভাইভা অভিজ্ঞতা',
             ),
             rowButton(
-              onTap: () => Get.to(OtherCategoryPostPage(
+              onTap: () => Get.offAll(OtherCategoryPostPage(
                 categoryName: 'ডাউনলোড জোন',
                 categoryId: 'i3hxQrpMyN7UiY7EseV9',
               )),
@@ -194,7 +196,7 @@ Widget sidebarComponent() {
               fontWeight: FontWeight.w500,
             ),
             rowButton(
-              onTap: () => Get.to(OtherCategoryPostPage(
+              onTap: () => Get.offAll(OtherCategoryPostPage(
                 categoryName: 'আবেদন ফরম,CV,অন্যান্য',
                 categoryId: 'ThXs21Jmzwrn4exGjedH',
               )),
@@ -236,12 +238,12 @@ Widget sidebarComponent() {
             ),
 
             rowButton(
-              onTap: () {},
+              onTap: () => Get.to(TermsConditionsPage()),
               icons: Icons.info_outlined,
               text: 'Terms-Conditions',
             ),
             rowButton(
-              onTap: () {},
+              onTap: () => Get.to(PrivacyPolicyPage()),
               icons: Icons.privacy_tip,
               text: 'Privacy Policy',
             ),

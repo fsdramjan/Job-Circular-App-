@@ -22,15 +22,20 @@ Widget cFormField({
   double? fontSize,
   EdgeInsetsGeometry? contentPadding,
   bool obscureText = false,
+  int? minLines,
+  int? maxLines = 1,
+  bool? isAutoValidateText = false,
 }) {
   return SizedBox(
-    height: height ?? 25,
+    height: height == 0 ? null : height ?? 25,
     child: TextFormField(
       onChanged: onChanged,
       controller: controller ?? TextEditingController(),
       keyboardType: textInputType,
       textAlign: textAlign,
       readOnly: readOnly,
+      minLines: minLines,
+      maxLines: maxLines,
       obscureText: obscureText,
       obscuringCharacter: '*',
       style: style ??
@@ -40,21 +45,28 @@ Widget cFormField({
           ),
       validator: isRequiredField == false
           ? null
-          : validatorText == '' &&
-                  validatorText!.isEmpty &&
-                  validatorText == 'null'
-              ? null
-              : (val) {
+          : isAutoValidateText == true
+              ? (val) {
                   if (val!.isEmpty) {
-                    return validatorText;
+                    return 'Enter your $hintText';
                   }
                   return null;
-                },
+                }
+              : validatorText == '' &&
+                      validatorText!.isEmpty &&
+                      validatorText == 'null'
+                  ? null
+                  : (val) {
+                      if (val!.isEmpty) {
+                        return validatorText;
+                      }
+                      return null;
+                    },
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius ?? 5),
           borderSide: BorderSide(
-            color: grey,
+            color: borderColor ?? grey,
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -64,6 +76,12 @@ Widget cFormField({
           ),
         ),
         errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 5),
+          borderSide: BorderSide(
+            color: red,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius ?? 5),
           borderSide: BorderSide(
             color: red,

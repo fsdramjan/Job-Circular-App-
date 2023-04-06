@@ -8,12 +8,13 @@ dialog({
   required Widget child,
   double? height,
   double? width,
-    
   String? dialogName,
 }) {
   var context = Get.context as BuildContext;
   var _height = height ?? Get.height / 1.5;
   var _width = width ?? Get.width;
+  final scrollController = ScrollController();
+
   showDialog(
       barrierDismissible: barrierDismissible,
       context: context,
@@ -30,50 +31,58 @@ dialog({
             //  / 1.5,
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                children: [
-                  dialogName == null
-                      ? Container()
-                      : Stack(
-                          alignment: Alignment.center,
+              child: SingleChildScrollView(
+                physics: NeverScrollableScrollPhysics(),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    dialogName == null
+                        ? Container()
+                        : Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              SizedBox(
+                                width: Get.width,
+                                child: Center(
+                                  child: KText(
+                                    text: '$dialogName',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                right: 10,
+                                child: IconButton(
+                                  splashRadius: 20,
+                                  onPressed: () => Get.back(),
+                                  icon: Icon(
+                                    Icons.close,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                    dialogName == null ? Container() : sizeH5,
+                    dialogName == null ? Container() : Divider(),
+                    dialogName == null ? Container() : sizeH20,
+                    SizedBox(
+                      height: height ?? Get.height / 2,
+                      width: _width,
+                      child: Scrollbar(
+                        controller: scrollController,
+                        child: ListView(
+                          shrinkWrap: true,
+                          primary: false,
+                          controller: scrollController,
                           children: [
-                            SizedBox(
-                              width: Get.width,
-                              child: Center(
-                                child: KText(
-                                  text: '$dialogName',
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              right: 10,
-                              child: IconButton(
-                                splashRadius: 20,
-                                onPressed: () => Get.back(),
-                                icon: Icon(
-                                  Icons.close,
-                                  size: 20,
-                                ),
-                              ),
-                            ),
+                            child,
                           ],
                         ),
-                  dialogName == null ? Container() : sizeH5,
-                  dialogName == null ? Container() : Divider(),
-                  dialogName == null ? Container() : sizeH20,
-                  SizedBox(
-                    height: height ?? Get.height / 2,
-                    width: _width,
-                    child: ListView(
-                      shrinkWrap: true,
-                      primary: false,
-                      children: [
-                        child,
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

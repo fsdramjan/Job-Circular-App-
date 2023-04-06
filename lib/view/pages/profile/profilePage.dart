@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_circular_app/service/configs/appUtils.dart';
@@ -13,6 +14,10 @@ import '../../widgets/text/kText.dart';
 class ProfilePage extends StatelessWidget with AllController {
   @override
   Widget build(BuildContext context) {
+    final _auth = FirebaseAuth.instance;
+
+    authC.phoneController.text = _auth.currentUser!.phoneNumber ?? '';
+
     authC.getProfileInfo().then((_) {
       _.map((e) {
         fileUploadC.selectedImage.value = e.image ?? '';
@@ -75,18 +80,35 @@ class ProfilePage extends StatelessWidget with AllController {
             sizeH10,
             cFormField(
               height: 45,
-              borderColor: grey,
               controller: authC.email.value,
+              borderColor: grey,
               hintText: 'Enter your email',
+              fontSize: 16,
+              contentPadding: paddingH10,
+            ),
+            sizeH10,
+            KText(
+              text: 'Phone',
+            ),
+            sizeH10,
+            cFormField(
+              height: 45,
+              borderColor: grey,
+              controller: authC.phoneController,
+              hintText: 'Enter your phone',
               readOnly: true,
               fontSize: 16,
               contentPadding: paddingH10,
+              suffixIcon: Icon(
+                Icons.lock,
+                size: 15,
+              ),
             ),
             sizeH5,
             Align(
               alignment: Alignment.centerRight,
               child: KText(
-                text: 'You can not update your primary email.',
+                text: 'You can not update your primary phone number.',
                 fontStyle: FontStyle.italic,
                 color: black54,
                 fontSize: 13,

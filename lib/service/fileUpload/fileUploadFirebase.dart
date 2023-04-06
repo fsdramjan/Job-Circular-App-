@@ -11,7 +11,7 @@ import '../dialog/loadingDialog.dart';
 class FirebaseFileUploadController extends GetxController {
   var selectedImage = RxString('');
   var selectedFile = RxString('');
-  var selectedFileName = RxString('');
+  var selectedFileName = RxString(''); 
 
   pickImage({
     required uploadCategory,
@@ -19,7 +19,7 @@ class FirebaseFileUploadController extends GetxController {
     var image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (image != null) {
-      loadingDialog(loadingText: 'Uploading File...');
+      loadingDialog(loadingText: 'Uploading Image...');
       Uint8List? uploadFile = await image.readAsBytes();
 
       Reference reference = FirebaseStorage.instance

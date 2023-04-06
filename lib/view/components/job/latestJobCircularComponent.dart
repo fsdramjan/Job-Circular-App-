@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:job_circular_app/model/jobs/jobsModel.dart';
 import 'package:job_circular_app/view/widgets/text/kText.dart';
 import '../../../service/configs/appColors.dart';
 import '../../../service/configs/appUtils.dart';
@@ -59,19 +58,7 @@ class LatestJobCircularComponent extends StatelessWidget with AllController {
                     child: customCard(
                       onTap: () => Get.to(
                         LatestJobCircularDetailsPage(
-                          images: item['images'],
-                          jobsModel: JobsModel(
-                            id: item['id'],
-                            name: item['name'],
-                            time: item['time'],
-                            applylink: item['applylink'],
-                            deadline: item['deadline'],
-                            description: item['description'],
-                            examDate: item['examDate'],
-                            numberOfpost: item['numberOfpost'],
-                            isJobCircular: item['isJobCircular'],
-                            isJobPreparation: item['isJobPreparation'],
-                          ),
+                          id: item['id'],
                         ),
                       ),
                       color: white,

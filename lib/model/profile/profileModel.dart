@@ -4,7 +4,7 @@ class ProfileModel {
   String? id;
   String? name;
   String? email;
-  String? password;
+  String? phone;
   String? image;
   String? time;
 
@@ -13,7 +13,7 @@ class ProfileModel {
     this.name,
     this.email,
     this.image,
-    this.password,
+    this.phone,
     this.time,
   });
 
@@ -22,7 +22,7 @@ class ProfileModel {
     name = doc['name'];
     email = doc['email'];
     image = doc['image'];
-    password = doc['password'];
+    phone = doc['phone'];
     time = doc['time'];
   }
 }

@@ -4,16 +4,19 @@ import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:job_circular_app/model/profile/profileModel.dart';
 import 'package:job_circular_app/service/configs/appColors.dart';
+import 'package:job_circular_app/service/configs/appUtils.dart';
 import 'package:job_circular_app/service/controllerService.dart';
 import 'package:job_circular_app/service/dialog/loadingDialog.dart';
 import 'package:job_circular_app/service/snackbar/snackbar.dart';
 import 'package:job_circular_app/view/pages/auth/loginPage.dart';
+import 'package:job_circular_app/view/pages/auth/registerPage.dart';
 import 'package:job_circular_app/view/pages/home/homePage.dart';
 
 String? userId() {
   final _auth = FirebaseAuth.instance;
-
-  var id = _auth.currentUser!.uid;
+  print(_auth.currentUser.toString());
+  var id =
+      _auth.currentUser == null ? 'Login as guest!!' : _auth.currentUser!.uid;
 
   return id;
 }
@@ -27,6 +30,12 @@ class AuthController extends GetxController {
   final password = TextEditingController().obs;
   final name = TextEditingController().obs;
 
+  final phoneController = TextEditingController();
+  final codeController = TextEditingController();
+
+  String? verificationId;
+  var endTime = RxInt(0);
+
   clear({
     bool isProfileInfo = false,
   }) {
@@ -34,6 +43,7 @@ class AuthController extends GetxController {
     if (isProfileInfo == true) {
       email.value.clear();
       password.value.clear();
+      codeController.clear();
       _.saveDocumentC.title.clear();
       _.saveDocumentC.password.clear();
       _.fileUploadC.selectedFile.value = '';
@@ -41,11 +51,93 @@ class AuthController extends GetxController {
     } else {
       email.value.clear();
       password.value.clear();
-
+      codeController.clear();
       name.value.clear();
       _.fileUploadC.selectedImage.value = '';
       _.fileUploadC.selectedFile.value = '';
       _.fileUploadC.selectedFileName.value = '';
+    }
+  }
+
+  sendOTP() {
+    submitPhoneNumber().then((value) {
+      endTime.value = DateTime.now().millisecondsSinceEpoch + 1000 * 30;
+    });
+  }
+
+  Future<void> submitPhoneNumber() async {
+    // await loadingDialog();
+
+    final String phone = "+880" + phoneController.text.trim();
+    await getStorage.write(phoneNumberL, phone);
+
+    print(phone);
+    await _auth.verifyPhoneNumber(
+      phoneNumber: phone,
+      timeout: Duration(seconds: 30),
+      verificationCompleted: (AuthCredential credential) async {
+        await _auth.signInWithCredential(credential);
+
+        print('OTP Code: ${credential.providerId}');
+        // Handle authentication success
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        // Get.back();
+
+        // Handle verification failure
+        snackbar(e.message.toString(), bgColor: red);
+        print('Failed: ${e.toString()}');
+      },
+      codeSent: (String? _verificationId, int? resendToken) {
+        snackbar('Code sent to $phone');
+
+        verificationId = _verificationId;
+      },
+      codeAutoRetrievalTimeout: (String _verificationId) {
+        // snackbar('Your verification id is $verificationId', bgColor: red);
+
+        verificationId = _verificationId;
+        // Get.back();
+      },
+    );
+  }
+
+  Future<void> submitVerificationCode() async {
+    loadingDialog(loadingText: 'Verifying....');
+    final String phone = "+880" + phoneController.text.trim();
+
+    final AuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId.toString(),
+        smsCode: codeController.text);
+    try {
+      await _auth.signInWithCredential(credential);
+
+//user exist check
+      getAllUsers().then((value) {
+        Get.back();
+        value.map((e) async {
+          print('${e.phone.toString().contains(phone)}==$phone');
+          if (e.phone.toString().contains(phone)) {
+            snackbar('Login Success!!');
+            phoneController.clear();
+            await getStorage.erase();
+            Get.offAll(HomePage());
+          } else {
+            // snackbar('Please add your profile info!!');
+
+            Get.to(RegisterPage());
+          }
+        }).toList();
+      });
+
+      // Handle authentication success
+    } on FirebaseException catch (e) {
+      Get.back();
+
+      // Handle authentication failure
+      snackbar(e.message, bgColor: red);
+
+      print(e.toString());
     }
   }
 
@@ -63,7 +155,7 @@ class AuthController extends GetxController {
         // getStorage.write(userUid, userCredential.user!.uid.toString());
 
         snackbar('User registration success!!');
-        addUserInfo(userCredential.user!.uid);
+        // addUserInfo(userCredential.user!.uid, userCredential.credential!.token);
         clear();
 
         Get.offAll(HomePage());
@@ -147,31 +239,45 @@ class AuthController extends GetxController {
     }
   }
 
-  addUserInfo(uid) async {
+  addUserInfo({bool isHideRoute = false}) async {
     try {
+      loadingDialog();
+
+      var id = _auth.currentUser!.uid;
+
+      print(_auth.currentUser.toString());
       final _ = AllController();
-      // final id = _firestore.collection('users').doc().id.toString();
-      await _firestore.collection('users').doc(uid).set({
-        'id': uid,
+
+      await _firestore.collection('users').doc(id).set({
+        'id': id,
         'name': name.value.text,
         'email': email.value.text,
-        'password': password.value.text,
+        'phone': phoneController.text,
         'time': DateTime.now().toString(),
         'image': _.fileUploadC.selectedImage.toString(),
       });
       _.fileUploadC.selectedImage.value = '';
+      id = '';
+      // token = null;
+      name.value.clear();
+      email.value.clear();
+      phoneController.clear();
+      if (isHideRoute == true) {
+      } else {
+        await getStorage.erase();
+
+        Get.offAll(HomePage());
+      }
     } catch (e) {
       print(e);
+      Get.back();
     }
   }
 
   signout() async {
-    // await getStorage.remove('userUid');
-    // await getStorage.erase();
-
     clear();
 
-    print('User ID Auth : $userId');
+    print('User ID Auth : $userId()');
 
     await _auth.signOut();
     Get.offAll(LoginPage());
@@ -184,7 +290,7 @@ class AuthController extends GetxController {
     try {
       await user.delete();
       snackbar('User deleted successfully.');
-      deleteUserInfo();
+      await deleteUserInfo();
       // getStorage.remove(userUid);
       clear();
       Get.offAll(LoginPage());
@@ -194,7 +300,7 @@ class AuthController extends GetxController {
     }
   }
 
-  deleteUserInfo() async {
+  Future deleteUserInfo() async {
     try {
       // final uid = getStorage.read(userUid);
 
@@ -218,7 +324,10 @@ class AuthController extends GetxController {
       };
 
       if (userId().toString() != '') {
-        await _firestore.collection('users').doc(userId().toString()).update(data);
+        await _firestore
+            .collection('users')
+            .doc(userId().toString())
+            .update(data);
         snackbar('Profile Updated!!');
         Get.back();
         Get.back();
@@ -239,6 +348,25 @@ class AuthController extends GetxController {
           .where('id', isEqualTo: userId().toString())
           .get()
           .then((value) {
+        value.docs.forEach((element) {
+          ProfileModel item = ProfileModel.fromDocumentSnapshot(element);
+          profileInfo.add(item);
+        });
+        return value.docs[0];
+      });
+      return profileInfo;
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
+
+  Future<List<ProfileModel>> getAllUsers() async {
+    List<ProfileModel> profileInfo = [];
+    // final uid = getStorage.read(userUid);
+
+    try {
+      await _firestore.collection('users').get().then((value) {
         value.docs.forEach((element) {
           ProfileModel item = ProfileModel.fromDocumentSnapshot(element);
           profileInfo.add(item);

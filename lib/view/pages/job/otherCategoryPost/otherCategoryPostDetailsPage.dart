@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:job_circular_app/service/configs/appUtils.dart';
 import 'package:job_circular_app/view/widgets/ads/ads.dart';
 import 'package:job_circular_app/view/widgets/card/customCard.dart';
+import 'package:job_circular_app/view/widgets/detailsPageCard/detailsPageCard.dart';
 import 'package:job_circular_app/view/widgets/text/kText.dart';
 
 import '../../../../model/otherPost/otherPostModel.dart';
@@ -10,6 +11,7 @@ import '../../../../service/configs/appColors.dart';
 import '../../../../service/datetime/datetimeFormat.dart';
 import '../../../components/drawer/sidebarComponent.dart';
 import '../../../widgets/appBar/cAppBar.dart';
+
 
 class OtherCategoryPostDetailsPage extends StatelessWidget {
   final OtherPostModel item;
@@ -88,40 +90,26 @@ class OtherCategoryPostDetailsPage extends StatelessWidget {
                             );
                     }),
                 Divider(),
-                customCard(
-                  elevation: 0,
-                  color: white,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: paddingAll10,
-                      child: KText(
-                        text:
-                            '''পরীক্ষার প্রস্তুতির জন্য বিভিন্ন পিডিএফ এবং অনন্যা বিষয়ে আপডেট থাকতে আমাদের ফেসবুক গ্রুপে যোগ দিন -
-fb.com/groups/quicktechitltd
-অথবা ফেইসবুক পেজে লাইক দিন -
-fb.com/quicktechitltd
-ওয়েবসাইট: www.quicktechitltd.com''',
-                      ),
-                    ),
-                  ),
-                ),
+                detailsPageCard(),
                 sizeH20,
-                Center(
-                  child: customCard(
-                    onTap: () {},
-                    color: blue,
-                    borderRadiusC: 10,
-                    child: Padding(
-                      padding: paddingAll10,
-                      child: KText(
-                        text: 'Apply Now',
-                        fontWeight: FontWeight.bold,
-                        color: white,
-                      ),
-                    ),
-                  ),
-                ),
+                // Center(
+                //   child: customCard(
+                //     onTap: () => Get.to(ApplyJobsPage(
+                //       jobId: item.id,
+                //       jobName: item.name,
+                //     )),
+                //     color: blue,
+                //     borderRadiusC: 10,
+                //     child: Padding(
+                //       padding: paddingAll10,
+                //       child: KText(
+                //         text: 'Apply Now',
+                //         fontWeight: FontWeight.bold,
+                //         color: white,
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
